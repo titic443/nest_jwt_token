@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  MBE:
+    container_name: mbe-kv
+    image: titich/mbekv:4.0.0
+    restart: always
+    # environment:
+    #   POSTGRES_PASSWORD: pgdb-ipms-dev
+    #   POSTGRES_USER: idmuser
+    #   POSTGRES_DB: pgdb-ipms-dev
+    ports:
+      - 3001:3001
+    # volumes:
+    #   - postgres:/var/lib/postgresql/data
