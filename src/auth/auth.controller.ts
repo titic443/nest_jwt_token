@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Logger,
   Post,
   Request,
   UseGuards,
@@ -13,7 +14,8 @@ import { AuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  logger = new Logger(AuthController.name)
+  constructor(private authService: AuthService) { }
 
   @HttpCode(HttpStatus.OK)
   @Post('login')
@@ -23,8 +25,8 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Get('profile')
-  getProfile(@Request() req) {
-    console.log(req.user);
+  getProfile(@Request() req: any) {
+    this.logger.log(JSON.stringify(`Token info: ${JSON.stringify(req.user)}`));
     return req.user;
   }
 }
